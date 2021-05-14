@@ -114,9 +114,19 @@
             } else {
                 return res.status(500).send("Block Not Found! Review the Parameters!");
             }
+        }
             
         });
-    }
+        validateChain() {
+            this.app.get("/validateChain", async (req, res) => {
+                let validation = await this.blockchain.validateChain();
+                if(validation){
+                    return res.status(200).json("Valid chain!");
+                } else {
+                    return res.status(500).send("An error happened!");
+                }
+            });
+        }
 
 }
 
